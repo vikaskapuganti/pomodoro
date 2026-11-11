@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pomodoro Focus Timer</title>
+  <meta name="description" content="Free Pomodoro focus timer. 25 minutes of focus, short breaks, daily focus stats, streaks and a 7-day chart. No login." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="header">
+      <h1>Pomodoro Focus Timer</h1>
+      <p class="subtitle">Focus for 25 minutes, rest for 5. Repeat. Watch your focus time add up.</p>
+    </header>
+
+    <!-- Timer -->
+    <section class="card summary">
+      <div class="modes" role="group" aria-label="Timer mode">
+        <button type="button" class="mode" data-mode="focus">Focus</button>
+        <button type="button" class="mode" data-mode="short">Short break</button>
+        <button type="button" class="mode" data-mode="long">Long break</button>
+      </div>
+
+      <div class="ring-wrap">
+        <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
+          <circle class="track" cx="60" cy="60" r="54" fill="none" stroke-width="7" />
+          <circle class="prog" id="prog" cx="60" cy="60" r="54" fill="none" stroke-width="7" stroke-linecap="round" />
+        </svg>
+        <div class="ring-center">
+          <p class="clock" id="clock" role="timer" aria-live="off">25:00</p>
+          <p class="phase" id="phase">Time to focus</p>
+          <div class="dots" id="dots" aria-label="Sessions in this round"></div>
+        </div>
+      </div>
+
+      <label class="field task-input">What are you working on?
+        <input type="text" id="task" maxlength="50" placeholder="e.g. DBMS Unit 3, Resume, Project report" autocomplete="off" />
+      </label>
+
+      <div class="controls">
+        <button type="button" class="btn primary" id="startBtn">Start</button>
+        <button type="button" class="btn ghost" id="resetBtn">Reset</button>
+        <button type="button" class="btn ghost" id="skipBtn">Skip</button>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="card">
+      <h2>Today</h2>
+      <div class="stats">
+        <div><p class="label">Focus time</p><p class="stat-num" id="todayMin">0m</p></div>
+        <div><p class="label">Sessions</p><p class="stat-num" id="todayCount">0</p></div>
+        <div><p class="label">Day streak</p><p class="stat-num" id="streak">0</p></div>
+      </div>
+      <h2 style="margin-top:20px">Last 7 days</h2>
+      <svg class="week" id="week" viewBox="0 0 350 140" role="img" aria-label="Focus minutes for the last 7 days"></svg>
+      <p class="muted" id="weekTotal"></p>
+    </section>
+
+    <!-- Log -->
+    <section class="card">
+      <h2>Today’s sessions</h2>
+      <div class="log" id="log"></div>
+      <p class="muted empty" id="emptyLog">No sessions yet today. Press Start and focus for one round.</p>
+    </section>
+
+    <!-- Settings -->
+    <section class="card">
+      <details class="settings">
+        <summary>Settings</summary>
+        <div class="set-grid">
+          <label class="field">Focus (min)<input type="number" id="setFocus" min="1" max="120" inputmode="numeric" /></label>
+          <label class="field">Short break (min)<input type="number" id="setShort" min="1" max="60" inputmode="numeric" /></label>
+          <label class="field">Long break (min)<input type="number" id="setLong" min="1" max="60" inputmode="numeric" /></label>
+          <label class="field">Long break after<input type="number" id="setEvery" min="2" max="10" inputmode="numeric" /></label>
+        </div>
+        <label class="check"><input type="checkbox" id="setAuto" /> Start the next timer automatically</label>
+        <label class="check"><input type="checkbox" id="setSound" /> Play a sound when time is up</label>
+        <label class="check"><input type="checkbox" id="setNotify" /> Show a notification when time is up</label>
+      </details>
+    </section>
+
+    <section class="card how">
+      <h2>How it works</h2>
+      <p>The <b>Pomodoro technique</b>: focus on one task for 25 minutes, then take a 5-minute break. After 4 focus sessions, take a longer 15-minute break.</p>
+      <p>Only <b>finished focus sessions</b> count in your stats. Your <b>day streak</b> is the number of days in a row with at least one session.</p>
+      <p>The timer keeps correct time even if you switch tabs or lock your phone for a while.</p>
+      <p>Everything is saved on this device only. No login, nothing sent anywhere.</p>
+    </section>
+
+    <footer class="footer">Built by Vikas Kapuganti</footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
